@@ -1,3 +1,3 @@
-# rss_reader
+# RSS reader
 
 Python web application for reading RSS feed.
