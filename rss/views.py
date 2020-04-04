@@ -16,15 +16,16 @@ def index(request):
         for e in feed['entries']:
             e['hash'] = 'p-' + str(abs(hash(e['title'])) % (10 ** 8))
         
-        pass
+        sort_enable = True
 
     else:
         feed = None
+        sort_enable = False
 
-    return render(request, 'rss/reader.html', { 'feed' : feed, })
+    return render(request, 'rss/reader.html', { 'feed' : feed, 'sort_enable' : sort_enable, })
 
 
-def sort_a(request):
+def sort_articles_ascending(request):   # oldest article first
 
     url = request.session['url']
     feed = feedparser.parse(url)
@@ -37,10 +38,10 @@ def sort_a(request):
         
     feed['entries'] = entries_asc_sorted
 
-    return render(request, 'rss/reader.html', { 'feed' : feed, })
+    return render(request, 'rss/reader.html', { 'feed' : feed, 'sort_enable' : True, })
 
 
-def sort_d(request):
+def sort_articles_descending(request):  # newest article first
 
     url = request.session['url']
     feed = feedparser.parse(url)
@@ -53,4 +54,4 @@ def sort_d(request):
         
     feed['entries'] = entries_asc_sorted
 
-    return render(request, 'rss/reader.html', { 'feed' : feed, })
+    return render(request, 'rss/reader.html', { 'feed' : feed, 'sort_enable' : True, })

@@ -16,25 +16,33 @@
         <li class="nav-item active">
             <a class="nav-link" href="/"><h2>RSS Reader</h2></a>
         </li>
+        {% if not sort_enable %}
         <li class="align-middle">
             <form class="form-inline">
                 <div class="form-group mx-sm-3 mb-2">
                     <label for="inputPassword2" class="sr-only">Password</label>
-                    <input type="text" class="form-control" placeholder="paste link" name="url">
+                    <input type="text" class="form-control mt-2" placeholder="paste link" name="url">
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Search</button>
+                <button type="submit" class="btn btn-primary mr-2">Search</button>
             </form>
         </li>
-        <li>
+        {%endif%}
+        {% if sort_enable %}
+        <li class="align-middle">
             <a href="{% url 'ascending' %}">
-                <button type="submit" class="btn btn-primary mb-2">ASC</button>
+                <button type="submit" class="btn btn-primary mx-2 mt-2">
+                    Najstaršie
+                </button>
             </a> 
         </li>
-        <li>
+        <li class="align-middle">
             <a href="{% url 'descending' %}">
-                <button type="submit" class="btn btn-primary mb-2">DESC</button>
+                <button type="submit" class="btn btn-primary mx-2 mt-2">
+                    Najnovšie
+                </button>
             </a> 
         </li>
+        {%endif%}
     </ul>
 </nav>
 

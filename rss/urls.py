@@ -5,7 +5,7 @@ from . import views
 urlpatterns= [
 
     path('', views.index, name='index'),
-    path('sortA/', views.sort_a, name='ascending'),
-    path('sortD/', views.sort_d, name='descending')
+    path('sortA/', views.sort_articles_ascending, name='ascending'),
+    path('sortD/', views.sort_articles_descending, name='descending')
 
 ]

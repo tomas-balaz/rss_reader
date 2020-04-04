@@ -16,7 +16,7 @@
                     <div class="row card-body collapse" id="{{entry.hash}}" data-parent="#accordion">
                         <div class="col-sm-6">
                             <p class="card-text">Popis: {{ entry.summary }}</p>
-                            <a href="{{ entry.link }}" class="btn btn-primary">Visit Link</a>
+                            <a href="{{ entry.link }}" target="_blank" class="btn btn-primary">Prejsť na článok</a>
                         </div>
                         <img class="col-sm-6" src="{{ entry.enclosures.0.href }}" >
                     </div>
