@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import feedparser
 
+from dict_hash import dict_hash
+
 
 def index(request):
 
@@ -9,6 +11,12 @@ def index(request):
         url = request.GET["url"] #Getting URL
         feed = feedparser.parse(url) #Parsing XML data
         pass
+
+        for e in feed['entries']:
+            e['hash'] = dict_hash(e)
+        
+        pass
+
     else:
         feed = None
 

@@ -2,18 +2,15 @@
 
 {% block body %}
     <br />
-
-    {% if feed %}
-    
+    {% if feed %}    
         <h2>{{ feed.feed.title }}</h2>
+        <br />
         {% if feed.entries %}
             <div id="accordion">
             {% for entry in feed.entries %}
                 <div class="card">
                     <div class="card-header" data-toggle="collapse" href="#{{entry.id}}">
-                        <!-- <a class="card-link" data-toggle="collapse" href="#{{entry.id}}"> -->
-                            <h5 class="card-title">{{ entry.title }}</h5>
-                        <!-- </a> -->
+                        <h5 class="card-title">{{ entry.title }}</h5>
                         <p class="card-text">{{ entry.published }}</p>
                     </div>
                     <div id="{{entry.id}}" class="collapse" data-parent="#accordion">
