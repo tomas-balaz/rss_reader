@@ -18,7 +18,7 @@
                             <p class="card-text">Popis: {{ entry.summary }}</p>
                             <a href="{{ entry.link }}" target="_blank" class="btn btn-primary">Prejsť na článok</a>
                         </div>
-                        <img class="col-sm-6" src="{{ entry.enclosures.0.href }}" >
+                        <img class="col-sm-6" src="{{ entry.enclosures.0.href }}" alt="article image">
                     </div>
                 </div>
             {% endfor %}
