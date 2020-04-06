@@ -3,19 +3,46 @@ from django.http import HttpResponse
 
 import feedparser
 from operator import itemgetter
+import html
+    
+
+def hash_entries(feed):
+    for e in feed['entries']:
+            e['hash'] = 'p-' + str(abs(hash(e['title'])) % (10 ** 8))
+            e['summary'] = html.unescape(e['summary'])     # unescape html symbols
+    
+    return feed
+
+
+def sort_entries(feed, sort):
+    entries = feed['entries']
+    
+    if sort == 'ASC':
+        sorted_entries = sorted(entries, key=itemgetter('published_parsed'))
+    elif sort == 'DESC':
+        sorted_entries = sorted(entries, key=itemgetter('published_parsed'), reverse=True)
+    else:
+        sorted_entries = entries  # no sorting
+
+    feed['entries'] = sorted_entries
+    return feed
+
+
+def prepare_feed(feed, sort=None):
+    feed_with_hashed_entries = hash_entries(feed)
+    feed_with_sorted_entries = sort_entries(feed_with_hashed_entries, sort)
+    return feed_with_sorted_entries
 
 
 def index(request):
 
     if request.GET.get("url"):
-        url = request.GET["url"] #Getting URL
-        feed = feedparser.parse(url) #Parsing XML data
+        url = request.GET["url"]
+        feed = feedparser.parse(url)
 
         request.session['url'] = url
 
-        for e in feed['entries']:
-            e['hash'] = 'p-' + str(abs(hash(e['title'])) % (10 ** 8))
-        
+        feed = prepare_feed(feed, sort=None)        
         sort_enable = True
 
     else:
@@ -30,13 +57,7 @@ def sort_articles_ascending(request):   # oldest article first
     url = request.session['url']
     feed = feedparser.parse(url)
 
-    entries = feed['entries']
-    entries_asc_sorted = sorted(entries, key=itemgetter('published_parsed'))
-
-    for e in entries_asc_sorted:
-        e['hash'] = 'p-' + str(abs(hash(e['title'])) % (10 ** 8))
-        
-    feed['entries'] = entries_asc_sorted
+    feed = prepare_feed(feed, sort='ASC')
 
     return render(request, 'rss/reader.html', { 'feed' : feed, 'sort_enable' : True, })
 
@@ -46,12 +67,6 @@ def sort_articles_descending(request):  # newest article first
     url = request.session['url']
     feed = feedparser.parse(url)
 
-    entries = feed['entries']
-    entries_asc_sorted = sorted(entries, key=itemgetter('published_parsed'), reverse=True)
-
-    for e in entries_asc_sorted:
-        e['hash'] = 'p-' + str(abs(hash(e['title'])) % (10 ** 8))
-        
-    feed['entries'] = entries_asc_sorted
+    feed = prepare_feed(feed, sort='DESC')
 
     return render(request, 'rss/reader.html', { 'feed' : feed, 'sort_enable' : True, })
