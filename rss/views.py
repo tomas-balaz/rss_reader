@@ -42,7 +42,7 @@ def index(request):
 
         request.session['url'] = url
 
-        feed = prepare_feed(feed, sort=None)        
+        feed = prepare_feed(feed)        
         sort_enable = True
 
     else:

@@ -1,24 +1,31 @@
 {% extends 'rss/base.html' %}
+{% load static %}
 
 {% block body %}
     <br />
     {% if feed %}    
-        <p class="h2">{{ feed.feed.title }}</p>
+        <p class="h2 ml-4">{{ feed.feed.title }}</p>
         <br />
         {% if feed.entries %}
-            <div id="accordion">
+            <div class="accordion md-accordion" id="feed-accordion" role="tablist" aria-multiselectable="true">
             {% for entry in feed.entries %}
                 <div class="card">
-                    <div class="card-header" data-toggle="collapse" href="#{{entry.hash}}">
-                        <h5 class="card-title">{{ entry.title }}</h5>
-                        <p class="card-text">{{ entry.published }}</p>
+                    <div class="card-header" role="tab"  id="h{{entry.hash}}">
+                        <a data-toggle="collapse" data-parent="#feed-accordion" href="#{{entry.hash}}" aria-expanded="true" aria-controls="{{entry.hash}}">
+                            <h4 class="mb-0">
+                                {{ entry.title }} <i class="fas fa-angle-down rotate-icon"></i>
+                            </h4>
+                          </a>
+                        <p class="card-text ml-3">{{ entry.published }}</p>
                     </div>
-                    <div class="row card-body collapse" id="{{entry.hash}}" data-parent="#accordion">
-                        <div class="col-sm-6">
-                            <p class="card-text">Popis: {{ entry.summary }}</p>
-                            <a href="{{ entry.link }}" target="_blank" class="btn btn-primary">Prejsť na článok</a>
+                    <div id="{{entry.hash}}" class="collapse" role="tabpanel"  aria-labelledby="h{{entry.hash}}" data-parent="#feed-accordion">
+                        <div class="row card-body">
+                            <div class="col-sm-6">
+                                <p class="card-text">Popis: {{ entry.summary }}</p>
+                                <a href="{{ entry.link }}" target="_blank" class="btn btn-primary">Prejsť na článok</a>
+                            </div>
+                            <img class="col-sm-6" src="{{ entry.enclosures.0.href }}" alt="article image">
                         </div>
-                        <img class="col-sm-6" src="{{ entry.enclosures.0.href }}" alt="article image">
                     </div>
                 </div>
             {% endfor %}
@@ -26,10 +33,10 @@
         {% endif %}
 
         {% else %}
-        <p>Zadajte svoj obľúbený informačný kanál RSS.</p>
+        <p class="ml-4">Zadajte svoj obľúbený informačný kanál RSS.</p>
     
     {% endif %}
 
-    {{ feed2 }}
+    <!-- {{ feed2 }} -->
 
 {% endblock %}
