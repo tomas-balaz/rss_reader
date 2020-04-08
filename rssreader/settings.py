@@ -25,7 +25,7 @@ SECRET_KEY = '-hb^s88-$*^n&e@znnj3dz1mui*u66e)fj3v(yc046_s^lumgv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://django-rss.azurewebsites.net/', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['127.0.0.1', 'django-rss.azurewebsites.net']
 
 
 # Application definition
