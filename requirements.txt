@@ -1,3 +1,18 @@
- --find-links wheelhouse
-django==3.0.5
+asgiref==3.2.7
+dateparser==0.7.4
+dict-hash==1.0.8
+Django==3.0.5
 feedparser==5.2.1
+humanize==2.2.0
+maya==0.6.1
+numpy==1.18.2
+pandas==1.0.3
+pendulum==2.1.0
+python-dateutil==2.8.1
+pytz==2019.3
+pytzdata==2019.3
+regex==2020.4.4
+six==1.14.0
+snaptime==0.2.4
+sqlparse==0.3.1
+tzlocal==2.0.0
