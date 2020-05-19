@@ -75,21 +75,18 @@ WSGI_APPLICATION = 'rssreader.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'sql_server.pyodbc',
-    #     'NAME': 'mydb',
-    #     'USER': 'user@myserver',
-    #     'PASSWORD': 'password',
-    #     'HOST': 'myserver.database.windows.net',
-    #     'PORT': '',
-    #     'OPTIONS': {
-    #         'driver': 'ODBC Driver 13 for SQL Server',
-    #     },
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'django_admin@django-rss-psql',
+        'PASSWORD': 'Dz4a#8bg',
+        'HOST': 'django-rss-psql.postgres.database.azure.com',
+        'PORT': '5432'
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 

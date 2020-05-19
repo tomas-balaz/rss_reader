@@ -20,12 +20,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Configure Postgres database
-DATABASES = {                                                                    
-    'default': {                                                                 
-        'ENGINE': 'django.db.backends.postgresql',                               
-        'NAME': os.environ['DBNAME'],                                            
-        'HOST': os.environ['DBHOST'],                                            
-        'USER': os.environ['DBUSER'],                                            
-        'PASSWORD': os.environ['DBPASS']                                         
-    }                                                                            
-}
+# DATABASES = {                                                                    
+#     'default': {                                                                 
+#         'ENGINE': 'django.db.backends.postgresql',                               
+#         'NAME': os.environ['DBNAME'],                                            
+#         'HOST': os.environ['DBHOST'],                                            
+#         'USER': os.environ['DBUSER'],                                            
+#         'PASSWORD': os.environ['DBPASS']                                         
+#     }                                                                            
+# }
