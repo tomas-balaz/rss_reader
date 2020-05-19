@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from htmlmin.decorators import minified_response
+
+
 import feedparser
 from operator import itemgetter
 import html
@@ -34,6 +37,7 @@ def prepare_feed(feed, sort=None):
     return feed_with_sorted_entries
 
 
+@minified_response
 def index(request):
 
     if request.GET.get("url"):
@@ -52,6 +56,7 @@ def index(request):
     return render(request, 'rss/reader.html', { 'feed' : feed, 'sort_enable' : sort_enable, })
 
 
+@minified_response
 def sort_articles_ascending(request):   # oldest article first
 
     url = request.session['url']
@@ -62,6 +67,7 @@ def sort_articles_ascending(request):   # oldest article first
     return render(request, 'rss/reader.html', { 'feed' : feed, 'sort_enable' : True, })
 
 
+@minified_response
 def sort_articles_descending(request):  # newest article first
 
     url = request.session['url']
