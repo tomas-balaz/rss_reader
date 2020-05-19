@@ -81,7 +81,10 @@ DATABASES = {
         'USER': 'django_admin@django-rss-psql',
         'PASSWORD': 'Dz4a#8bg',
         'HOST': 'django-rss-psql.postgres.database.azure.com',
-        'PORT': '5432'
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        }
     }
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
