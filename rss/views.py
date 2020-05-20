@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from htmlmin.decorators import minified_response
-
-
 import feedparser
 from operator import itemgetter
 import html
